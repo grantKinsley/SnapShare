@@ -69,6 +69,7 @@ class Profile extends Component {
     await axios
       .post("http://localhost:5000/name/getname", array)
       .then((res) => { 
+        console.log('from getname', res.data.friends)
         if ((res.status !== 204 && res.data.friends.includes(this.state.myId)) || this.state.myProfile)
           // block viewing if not friends with you
           this.setState({ id: res.data._id, name: res.data.name, found: true });
@@ -130,9 +131,11 @@ class Profile extends Component {
   }
 
   render() {
-    if (this.state.loading)
+    if (this.state.loading) {
       // initially just show loading
+      console.log(this.state)
       return <div>Loading...</div>;
+    }
     else if (!this.state.logged) {
       // once loading done, if logged false, don't show page
       return <Redirect to="/" />;

@@ -200,7 +200,7 @@ class Post extends Component {
       .post("http://localhost:5000/auth/logged")
       .then((res) => {
         // console.log("succ", res);
-        this.setState({ logged: true });
+        this.setState({ logged: true, myId: res.data.id });
         this.fetchPost();
       })
       .catch((err) => {

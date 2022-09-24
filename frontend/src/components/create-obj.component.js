@@ -25,6 +25,7 @@ export default class CreateObj extends Component {
       body: "",
       file: null,
       button: true,
+      submitted: false,
     };
   }
 
@@ -75,7 +76,7 @@ export default class CreateObj extends Component {
       })
       .then((res) => {
         // console.log(res);
-        this.setState({ name: "", body: "", button: true, file: null });
+        this.setState({ name: "", body: "", button: true, file: null, submitted: true });
       })
       .catch((err) => {
         this.setState({ button: true });
@@ -88,6 +89,8 @@ export default class CreateObj extends Component {
     if (this.state.loading) {
       return <div>Loading...</div>;
     } else if (!this.state.logged) {
+      return <Redirect to="/" />;
+    } else if (this.state.submitted) {
       return <Redirect to="/" />;
     }
     return (

@@ -20,7 +20,11 @@ router.post("/regis", (req, res, next) => {
                 // console.log('creating new user')
                 const newUser = ({
                     name: req.body.name,
-                    password: req.body.password
+                    password: req.body.password,
+                    posts: [],
+                    friends: [],
+                    catchFriends: [],
+                    throwFriends: []
                 });
                 // Hash password before saving in database
                 bcrypt.genSalt(10, (err, salt) => {
