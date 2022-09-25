@@ -30,7 +30,7 @@ export default class Register extends Component {
 
   componentDidMount() {
     axios
-      .post("http://localhost:5000/auth/logged")
+      .post(`${process.env.REACT_APP_API_URL}/auth/logged`)
       .then((res) => {
         // console.log("succ", res); // if true, means logged in
         this.setState({ logged: true, loading: false, redirect: "/" });
@@ -68,7 +68,7 @@ export default class Register extends Component {
       return;
     }
     axios
-      .post("http://localhost:5000/auth/regis", objObject)
+      .post(`${process.env.REACT_APP_API_URL}/auth/regis`, objObject)
       .then((res) => {
         // only remove if complete successfully
         // console.log(res);

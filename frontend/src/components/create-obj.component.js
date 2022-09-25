@@ -31,7 +31,7 @@ export default class CreateObj extends Component {
 
   componentDidMount() {
     axios
-      .post("http://localhost:5000/auth/logged")
+      .post(`${process.env.REACT_APP_API_URL}/auth/logged`)
       .then((arr) => {
         // console.log(arr);
         this.setState({ logged: true, loading: false });
@@ -71,7 +71,7 @@ export default class CreateObj extends Component {
     // console.log(formData);
 
     axios
-      .post("http://localhost:5000/objs/create-obj", formData, {
+      .post(`${process.env.REACT_APP_API_URL}/objs/create-obj`, formData, {
         headers: { "content-type": "multipart/form-data" },
       })
       .then((res) => {
@@ -91,7 +91,7 @@ export default class CreateObj extends Component {
     } else if (!this.state.logged) {
       return <Redirect to="/" />;
     } else if (this.state.submitted) {
-      return <Redirect to="/" />;
+      return <Redirect to="/myProfile" />;
     }
     return (
       <div className="user-home">

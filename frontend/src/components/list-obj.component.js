@@ -15,7 +15,7 @@ export default class ListObj extends Component {
 
   componentDidMount() {
     axios
-      .post("http://localhost:5000/auth/logged")
+      .post(`${process.env.REACT_APP_API_URL}/auth/logged`)
       .then((arr) => {
         // console.log(arr);
         this.setState({ redirect: "/profile/" + arr.data.id, loading: false });

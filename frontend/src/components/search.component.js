@@ -170,7 +170,7 @@ export default class Search extends Component {
 
   fetchStatus() {
     axios
-      .post("http://localhost:5000/friend/showfriend")
+      .post(`${process.env.REACT_APP_API_URL}/friend/showfriend`)
       .then((res) => {
         // only remove if complete successfully
         // console.log(res.data);
@@ -194,7 +194,7 @@ export default class Search extends Component {
 
   componentDidMount() {
     axios
-      .post("http://localhost:5000/auth/logged")
+      .post(`${process.env.REACT_APP_API_URL}/auth/logged`)
       .then((arr) => {
         // console.log(arr);
         this.setState({ logged: true, loading: false, myId: arr.data.id });
@@ -214,7 +214,7 @@ export default class Search extends Component {
     // console.log("clicked unfriend!");
     // console.log(e.target.id);
     axios
-      .post("http://localhost:5000/friend/unfriend", { id: e.target.id })
+      .post(`${process.env.REACT_APP_API_URL}/friend/unfriend`, { id: e.target.id })
       .then((res) => {
         // console.log("successful!");
         this.fetchStatus();
@@ -228,7 +228,7 @@ export default class Search extends Component {
     // console.log("clicked accept!");
     // console.log(e.target.id);
     axios
-      .post("http://localhost:5000/friend/acceptreq", { id: e.target.id })
+      .post(`${process.env.REACT_APP_API_URL}/friend/acceptreq`, { id: e.target.id })
       .then((res) => {
         // console.log("successful!");
         this.fetchStatus();
@@ -242,7 +242,7 @@ export default class Search extends Component {
     // console.log("clicked reject!");
     // console.log(e.target.id);
     axios
-      .post("http://localhost:5000/friend/rejectreq", { id: e.target.id })
+      .post(`${process.env.REACT_APP_API_URL}/friend/rejectreq`, { id: e.target.id })
       .then((res) => {
         // console.log("successful!");
         this.fetchStatus();
@@ -257,7 +257,7 @@ export default class Search extends Component {
     // console.log(e.target.id);
 
     axios
-      .post("http://localhost:5000/friend/undorequest", { id: e.target.id })
+      .post(`${process.env.REACT_APP_API_URL}/friend/undorequest`, { id: e.target.id })
       .then((res) => {
         // console.log("successful!");
         this.fetchStatus();
@@ -272,7 +272,7 @@ export default class Search extends Component {
     // console.log(e.target.id);
 
     axios
-      .post("http://localhost:5000/friend/addfriend", { id: e.target.id })
+      .post(`${process.env.REACT_APP_API_URL}/friend/addfriend`, { id: e.target.id })
       .then((res) => {
         // console.log("successful!");
         this.fetchStatus();
@@ -294,7 +294,7 @@ export default class Search extends Component {
       return;
     }
     axios
-      .post("http://localhost:5000/search/user", searchString)
+      .post(`${process.env.REACT_APP_API_URL}/search/user`, searchString)
       .then((res) => {
         // only remove if complete successfully
         if (res.status === 204) {
@@ -317,7 +317,7 @@ export default class Search extends Component {
       });
     let temp = [];
     axios
-      .post("http://localhost:5000/search/post", searchString)
+      .post(`${process.env.REACT_APP_API_URL}/search/post`, searchString)
       .then((res) => {
         // only remove if complete successfully
         if (res.status === 204) {
@@ -343,7 +343,7 @@ export default class Search extends Component {
   async getNames(temp) {
     await Promise.all(
       temp.map(async (post) => {
-        const poster = await axios.post("http://localhost:5000/name/getname", [
+        const poster = await axios.post(`${process.env.REACT_APP_API_URL}/name/getname`, [
           post.uploader,
         ]);
         post.poster = poster.data.name; // add name to poster

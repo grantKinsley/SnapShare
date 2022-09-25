@@ -57,11 +57,11 @@ class Likes extends Component {
   }
 
   async getAll() {
-    await axios.post("http://localhost:5000/log").then((res) => {
+    await axios.post(`${process.env.REACT_APP_API_URL}/log`).then((res) => {
       this.setState({ myId: res.data.id, logged: true });
     });
     await axios
-      .post("http://localhost:5000/objs/favorite-obj", [this.state.myId])
+      .post(`${process.env.REACT_APP_API_URL}/objs/favorite-obj`, [this.state.myId])
       .then((res) => {
         // console.log("success", res.data);
         this.setState({
@@ -74,7 +74,7 @@ class Likes extends Component {
     let temp = this.state.gallery;
     await Promise.all(
       temp.map(async (post) => {
-        const poster = await axios.post("http://localhost:5000/name/getname", [
+        const poster = await axios.post(`${process.env.REACT_APP_API_URL}/name/getname`, [
           post.uploader,
         ]);
         post.poster = poster.data.name; // add name to poster
@@ -87,7 +87,7 @@ class Likes extends Component {
 
   componentDidMount() {
     axios
-      .post("http://localhost:5000/auth/logged")
+      .post(`${process.env.REACT_APP_API_URL}/auth/logged`)
       .then((arr) => {
         // console.log(arr);
         this.getAll();

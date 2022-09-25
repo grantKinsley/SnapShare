@@ -20,7 +20,7 @@ export default class Home extends Component {
       loading_done: false,
     };
     axios
-      .post("http://localhost:5000/auth/logged")
+      .post(`${process.env.REACT_APP_API_URL}/auth/logged`)
       .then((res) => {
         // console.log(res);
         this.setState({ redirect: "/myProfile", loading_done: true });

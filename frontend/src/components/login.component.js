@@ -28,7 +28,7 @@ export default class Login extends Component {
   }
   componentDidMount() {
     axios
-      .post("http://localhost:5000/auth/logged")
+      .post(`${process.env.REACT_APP_API_URL}/auth/logged`)
       .then((res) => {
         // console.log("succ", res); // if true, means logged in
         this.setState({ logged: true, loading: false, redirect: "/" });
@@ -64,7 +64,7 @@ export default class Login extends Component {
       return;
     }
     axios
-      .post("http://localhost:5000/auth/login", objObject)
+      .post(`${process.env.REACT_APP_API_URL}/auth/login`, objObject)
       .then((res) => {
         // only remove if complete successfully
         // console.log(res);
@@ -107,7 +107,7 @@ export default class Login extends Component {
             />
           </Form.Group>
 
-          <Form.Group controlId="Name">
+          <Form.Group controlId="Password">
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
