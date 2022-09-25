@@ -60,15 +60,16 @@ class Profile extends Component {
     // console.log(uid);
     var array = [];
     array.push(uid);
-    await axios.post("http://localhost:5000/log").then((res) => {
+    await axios.post(`${process.env.REACT_APP_API_URL}/log`).then((res) => {
       if (res.data.id === uid)
         this.setState({ myProfile: true });
       else
         this.setState({ myId: res.data.id })
     });
     await axios
-      .post("http://localhost:5000/name/getname", array)
+      .post(`${process.env.REACT_APP_API_URL}/name/getname`, array)
       .then((res) => { 
+        console.log('from getname', res.data.friends)
         if ((res.status !== 204 && res.data.friends.includes(this.state.myId)) || this.state.myProfile)
           // block viewing if not friends with you
           this.setState({ id: res.data._id, name: res.data.name, found: true });
@@ -80,7 +81,7 @@ class Profile extends Component {
       });
     if (this.state.found) {
       await axios
-        .post("http://localhost:5000/objs/profile-obj", array)
+        .post(`${process.env.REACT_APP_API_URL}/objs/profile-obj`, array)
         .then((res) => {
           // console.log("success", res.data);
           this.setState({
@@ -98,7 +99,7 @@ class Profile extends Component {
   }
   componentDidMount() {
     axios
-      .post("http://localhost:5000/auth/logged")
+      .post(`${process.env.REACT_APP_API_URL}/auth/logged`)
       .then((res) => {
         // console.log("succ", res);
         this.setState({ logged: true });
@@ -130,9 +131,11 @@ class Profile extends Component {
   }
 
   render() {
-    if (this.state.loading)
+    if (this.state.loading) {
       // initially just show loading
+      console.log(this.state)
       return <div>Loading...</div>;
+    }
     else if (!this.state.logged) {
       // once loading done, if logged false, don't show page
       return <Redirect to="/" />;

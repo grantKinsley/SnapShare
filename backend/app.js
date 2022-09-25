@@ -9,7 +9,7 @@ const MongoStore = require("connect-mongo")(session);
 require("dotenv").config();
 
 const ur =
-  "mongodb+srv://test:passw0rd@cs97-cluster.gukdx.mongodb.net/app?retryWrites=true&w=majority";
+  "mongodb+srv://mongouser:QKtPhbsZitk4MZYt@cluster0.m4jtmrc.mongodb.net/?retryWrites=true&w=majority";
 var db = require("./db");
 db.connect(ur, function (err) {
   if (err) {

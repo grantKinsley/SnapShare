@@ -91,7 +91,7 @@ class Post extends Component {
       return;
     }
     axios
-      .post("http://localhost:5000/post/addcomment", objObject)
+      .post(`${process.env.REACT_APP_API_URL}/post/addcomment`, objObject)
       .then((res) => {
         this.fetchPost();
         this.setState({ newComment: "", disabled: false });
@@ -130,7 +130,7 @@ class Post extends Component {
     let upld = [];
 
     await axios
-      .post("http://localhost:5000/post/fetch", pid)
+      .post(`${process.env.REACT_APP_API_URL}/post/fetch`, pid)
       .then((res) => {
         // console.log("made it back to fetch");
         //console.log(res);
@@ -157,7 +157,7 @@ class Post extends Component {
       });
 
     await axios
-      .post("http://localhost:5000/post/likeStatus")
+      .post(`${process.env.REACT_APP_API_URL}/post/likeStatus`)
       .then((resol) => {
         // console.log("returned", resol.data);
         if (resol.data.likeArray !== undefined) {
@@ -174,7 +174,7 @@ class Post extends Component {
 
     // convert nameID to username
     var upldName = await axios
-      .post("http://localhost:5000/name/getname", upld)
+      .post(`${process.env.REACT_APP_API_URL}/name/getname`, upld)
       .then((resol) => {
         upldName = resol.data.name;
         // console.log(upldName);
@@ -197,10 +197,10 @@ class Post extends Component {
 
   componentDidMount() {
     axios
-      .post("http://localhost:5000/auth/logged")
+      .post(`${process.env.REACT_APP_API_URL}/auth/logged`)
       .then((res) => {
         // console.log("succ", res);
-        this.setState({ logged: true });
+        this.setState({ logged: true, myId: res.data.id });
         this.fetchPost();
       })
       .catch((err) => {
@@ -212,7 +212,7 @@ class Post extends Component {
   likePost() {
     this.setState({ likeDisabled: true });
     axios
-      .post("http://localhost:5000/post/likePost", {
+      .post(`${process.env.REACT_APP_API_URL}/post/likePost`, {
         likeState: this.state.liked,
         post: this.props.match.params.id,
       })

@@ -25,12 +25,13 @@ export default class CreateObj extends Component {
       body: "",
       file: null,
       button: true,
+      submitted: false,
     };
   }
 
   componentDidMount() {
     axios
-      .post("http://localhost:5000/auth/logged")
+      .post(`${process.env.REACT_APP_API_URL}/auth/logged`)
       .then((arr) => {
         // console.log(arr);
         this.setState({ logged: true, loading: false });
@@ -70,12 +71,12 @@ export default class CreateObj extends Component {
     // console.log(formData);
 
     axios
-      .post("http://localhost:5000/objs/create-obj", formData, {
+      .post(`${process.env.REACT_APP_API_URL}/objs/create-obj`, formData, {
         headers: { "content-type": "multipart/form-data" },
       })
       .then((res) => {
         // console.log(res);
-        this.setState({ name: "", body: "", button: true, file: null });
+        this.setState({ name: "", body: "", button: true, file: null, submitted: true });
       })
       .catch((err) => {
         this.setState({ button: true });
@@ -89,6 +90,8 @@ export default class CreateObj extends Component {
       return <div>Loading...</div>;
     } else if (!this.state.logged) {
       return <Redirect to="/" />;
+    } else if (this.state.submitted) {
+      return <Redirect to="/myProfile" />;
     }
     return (
       <div className="user-home">

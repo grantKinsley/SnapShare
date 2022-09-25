@@ -107,7 +107,7 @@ export default class Friends extends Component {
   }
   async fetchStatus() {
     await axios
-      .post("http://localhost:5000/friend/showfriend")
+      .post(`${process.env.REACT_APP_API_URL}/friend/showfriend`)
       .then((res) => {
         // only remove if complete successfully
         // console.log(res.data);
@@ -126,7 +126,7 @@ export default class Friends extends Component {
         alert(err);
       });
     await axios
-      .post("http://localhost:5000/name/getnames", this.state.accepted)
+      .post(`${process.env.REACT_APP_API_URL}/name/getnames`, this.state.accepted)
       .then((res) => {
         // console.log(res);
         this.setState({
@@ -134,7 +134,7 @@ export default class Friends extends Component {
         }); // sort alphabetically
       });
     await axios
-      .post("http://localhost:5000/name/getnames", this.state.requests)
+      .post(`${process.env.REACT_APP_API_URL}/name/getnames`, this.state.requests)
       .then((res) => {
         // console.log(res);
         this.setState({
@@ -142,7 +142,7 @@ export default class Friends extends Component {
         }); // sort alphabetically
       });
     await axios
-      .post("http://localhost:5000/name/getnames", this.state.pending)
+      .post(`${process.env.REACT_APP_API_URL}/name/getnames`, this.state.pending)
       .then((res) => {
         // console.log(res);
         this.setState({
@@ -153,7 +153,7 @@ export default class Friends extends Component {
   }
   componentDidMount() {
     axios
-      .post("http://localhost:5000/auth/logged")
+      .post(`${process.env.REACT_APP_API_URL}/auth/logged`)
       .then((arr) => {
         // console.log(arr);
         this.setState({ logged: true, loading: false });
@@ -169,7 +169,7 @@ export default class Friends extends Component {
     // console.log("clicked unfriend!");
     // console.log(e.target.id);
     axios
-      .post("http://localhost:5000/friend/unfriend", { id: e.target.id })
+      .post(`${process.env.REACT_APP_API_URL}/friend/unfriend`, { id: e.target.id })
       .then((res) => {
         // console.log("successful!");
         this.fetchStatus();
@@ -184,7 +184,7 @@ export default class Friends extends Component {
     // console.log(e.target.id);
 
     axios
-      .post("http://localhost:5000/friend/undorequest", { id: e.target.id })
+      .post(`${process.env.REACT_APP_API_URL}/friend/undorequest`, { id: e.target.id })
       .then((res) => {
         // console.log("successful!");
         this.fetchStatus();
@@ -198,7 +198,7 @@ export default class Friends extends Component {
     // console.log("clicked accept!");
     // console.log(e.target.id);
     axios
-      .post("http://localhost:5000/friend/acceptreq", { id: e.target.id })
+      .post(`${process.env.REACT_APP_API_URL}/friend/acceptreq`, { id: e.target.id })
       .then((res) => {
         // console.log("successful!");
         this.fetchStatus();
@@ -212,7 +212,7 @@ export default class Friends extends Component {
     // console.log("clicked reject!");
     // console.log(e.target.id);
     axios
-      .post("http://localhost:5000/friend/rejectreq", { id: e.target.id })
+      .post(`${process.env.REACT_APP_API_URL}/friend/rejectreq`, { id: e.target.id })
       .then((res) => {
         // console.log("successful!");
         this.fetchStatus();

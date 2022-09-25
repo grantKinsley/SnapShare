@@ -21,7 +21,7 @@ export default class ObjList extends Component {
     e.preventDefault();
     this.setState({ disabled: true });
     axios
-      .post("http://localhost:5000/auth/logout")
+      .post(`${process.env.REACT_APP_API_URL}/auth/logout`)
       .then((res) => {
         // only remove if complete successfully
         // console.log(res);
