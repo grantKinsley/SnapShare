@@ -91,6 +91,6 @@ router.post("/logged", (req, res) => {
         return res.status(200).json({ message: 'logged in', id: req.session.passport.user})
     }
     else
-    return res.status(403).json({ message: 'not logged in' })
+    return res.status(405).json({ message: 'not logged in' })
 })
     module.exports = router;
